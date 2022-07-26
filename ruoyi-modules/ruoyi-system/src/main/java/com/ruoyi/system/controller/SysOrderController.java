@@ -1,11 +1,13 @@
 package com.ruoyi.system.controller;
 
+import com.ruoyi.common.core.utils.uuid.IdUtils;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.common.core.web.domain.AjaxResult;
 import com.ruoyi.system.domain.SysOrder;
 import com.ruoyi.system.service.ISysOrderService;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,17 +33,7 @@ public class SysOrderController extends BaseController
         SysOrder sysOrder = new SysOrder();
         sysOrder.setUserId(userId);
         sysOrder.setStatus("0");
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = new MultipartBody.Builder().setType(Objects.requireNonNull(mediaType))
-                .build();
-        Request request = new Request.Builder()
-                .url("http://119.91.212.182:8081/api/snowflake/get/test")
-                .method("POST", body)
-                .build();
-        Response response = client.newCall(request).execute();
-        sysOrder.setOrderNo(Objects.requireNonNull(response.body()).string());
+        sysOrder.setOrderNo(IdUtils.fastUUID());
         return AjaxResult.success(sysOrderService.insertSysOrder(sysOrder));
     }
 
