@@ -40,6 +40,7 @@
         <poi.version>4.1.2</poi.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <transmittable-thread-local.version>2.13.2</transmittable-thread-local.version>
+        <sharding-jdbc-core.version>4.1.1</sharding-jdbc-core.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -238,7 +239,11 @@
                 <artifactId>ruoyi-api-system</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-core</artifactId>
+                <version>${sharding-jdbc-core.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
